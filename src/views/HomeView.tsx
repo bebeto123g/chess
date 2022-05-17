@@ -1,41 +1,45 @@
-import React, { FormEventHandler } from 'react'
-import { observer } from 'mobx-react'
+import React, { useCallback, useEffect, useState } from 'react'
 
-import $user from '../store/User'
-import TextInput from '../components/Forms/TextInput/TextInput'
 import Container from '../UI/Container/Container'
-import HookForms from '../components/HookForms/HookForms'
+import BoardView from '../components/BoardView'
+import { Board } from '../models/BoardModel'
+import { Player } from '../models/PLayerModel'
+import { Colors } from '../models/ColorsModel'
 
-const HomeView = observer(() => {
-    const submitHandler: FormEventHandler<HTMLFormElement> = (event) => {
-        event.preventDefault()
-        console.log($user.state)
+const HomeView = () => {
+    const [board, setBoard] = useState(new Board())
+    const [whitePlayer, setWhitePlayer] = useState(new Player(Colors.WHITE))
+    const [blackPlayer, setBlackPlayer] = useState(new Player(Colors.BLACK))
+    const [currentPlayer, setCurrentPlayer] = useState<Player | null>(null)
+
+    useEffect(() => {
+        restart()
+    }, [])
+
+    const restart = () => {
+        const newBoard = new Board()
+        setCurrentPlayer(whitePlayer)
+        setBoard(newBoard)
     }
+
+    const swapPlayer = () => {
+        setCurrentPlayer((prev) => (prev === whitePlayer ? blackPlayer : whitePlayer))
+    }
+
+    const updateBoard = useCallback((board: Board) => {
+        setBoard(board)
+    }, [])
 
     return (
         <Container>
-            <h1>Home Page</h1>
-            <form onSubmit={submitHandler}>
-                <TextInput
-                    value={$user.name}
-                    onChange={(e) => $user.setName(e.target.value)}
-                    name={'name'}
-                    labelText='Имя'
-                />
-                <TextInput
-                    value={$user.surname}
-                    onChange={(e) => $user.setSurname(e.target.value)}
-                    name={'lastName'}
-                    labelText='Фамилия'
-                />
-                <button type='submit'>Отправить форму</button>
-            </form>
-            <br />
-            <hr />
-            <br />
-            <HookForms />
+            <BoardView
+                board={board}
+                setBoard={updateBoard}
+                currentPlayer={currentPlayer}
+                swapPlayer={swapPlayer}
+            />
         </Container>
     )
-})
+}
 
 export default HomeView

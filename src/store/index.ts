@@ -1,5 +1,5 @@
-import $user from './User'
+import $board from './BoardState'
 
 export const store = {
-    $user,
+    $board,
 }

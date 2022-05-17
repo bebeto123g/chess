@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'mobx-react'
 
 import './styles/global.scss'
+import './styles/App.scss'
 import App from './App'
 import { store } from './store'
 import reportWebVitals from './reportWebVitals'

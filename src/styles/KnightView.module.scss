@@ -1,0 +1,10 @@
+@import './services/common.scss';
+
+.board {
+}
+
+.cell {
+    &:hover {
+        background: #000;
+    }
+}
