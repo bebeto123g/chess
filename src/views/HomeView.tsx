@@ -5,6 +5,7 @@ import BoardView from '../components/BoardView'
 import { Board } from '../models/BoardModel'
 import { Player } from '../models/PLayerModel'
 import { Colors } from '../models/ColorsModel'
+import LostFigureView from '../components/LostFigureView'
 
 const HomeView = () => {
     const [board, setBoard] = useState(new Board())
@@ -38,6 +39,10 @@ const HomeView = () => {
                 currentPlayer={currentPlayer}
                 swapPlayer={swapPlayer}
             />
+            <div className=''>
+                <LostFigureView title='Black' figures={board.lostBlackFigures} />
+                <LostFigureView title='White' figures={board.lostWhiteFigures} />
+            </div>
         </Container>
     )
 }

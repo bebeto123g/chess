@@ -1,10 +1,51 @@
 @import './services/common.scss';
 
 .board {
+    overflow: hidden;
 }
 
 .cell {
-    &:hover {
-        background: #000;
+    position: relative;
+
+    input {
+        position: absolute;
+        visibility: hidden;
+    }
+
+    label {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+
+        &:before {
+            content: '';
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            transition: transform 0.15s;
+        }
+
+    }
+
+    input:checked {
+        & + label {
+            background: green;
+            z-index: 10;
+
+            &:before {
+                box-shadow: 128px 64px 0 2px red,
+                            128px -64px 0 2px red,
+                            -128px 64px 0 2px red,
+                            -128px -64px 0 2px red,
+                            64px 128px 0 2px red,
+                            -64px 128px 0 2px red,
+                            64px -128px 0 2px red,
+                            -64px -128px 0 2px red;
+            }
+        }
     }
 }

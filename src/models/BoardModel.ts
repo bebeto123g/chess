@@ -1,6 +1,7 @@
 import { Cell } from './CellModel'
 import { Colors } from './ColorsModel'
 import { Bishop } from './figures/BishopModel'
+import { Figure } from './figures/FigureModel'
 import { King } from './figures/KingModel'
 import { Knight } from './figures/KnightModel'
 import { Pawn } from './figures/PawnModel'
@@ -9,6 +10,8 @@ import { Rook } from './figures/RookModel'
 
 export class Board {
     cells: Cell[][] = []
+    lostWhiteFigures: Figure[] = []
+    lostBlackFigures: Figure[] = []
 
     constructor() {
         this.drawBoard()
@@ -41,6 +44,8 @@ export class Board {
     public getCopyBoard(): Board {
         const newBoard = new Board()
         newBoard.cells = this.cells
+        newBoard.lostWhiteFigures = this.lostWhiteFigures
+        newBoard.lostBlackFigures = this.lostBlackFigures
         return newBoard
     }
 

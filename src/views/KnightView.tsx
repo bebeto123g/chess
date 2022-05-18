@@ -6,7 +6,9 @@ const KnightView = () => {
     const count = useRef(0)
 
     return (
-        <div className={`board ${styles.board}`}>
+        <form
+            className={`board ${styles.board}`}
+        >
             {Array(8)
                 .fill('')
                 .map((_1, i) => {
@@ -16,15 +18,21 @@ const KnightView = () => {
                             const color = (i + j) % 2 !== 0 ? Colors.BLACK : Colors.WHITE
                             count.current++
                             return (
-                                <div
-                                    key={i + j}
-                                    className={`cell ${color} ${styles.cell}`}
-                                    data-index={count.current}
-                                ></div>
+                                <div key={i + j} className={`cell ${color} ${styles.cell}`}>
+                                    <input
+                                        type='radio'
+                                        name={`chess`}
+                                        id={`chess-${count.current}`}
+                                    />
+                                    <label
+                                        htmlFor={`chess-${count.current}`}
+                                        data-index={count.current}
+                                    />
+                                </div>
                             )
                         })
                 })}
-        </div>
+        </form>
     )
 }
 
