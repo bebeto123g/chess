@@ -1,19 +1,19 @@
 import React, { FC, memo } from 'react'
 import { Cell } from '../models/CellModel'
+import BoardState from '../store/BoardState'
 
 interface ICellProps {
     cell: Cell
     isSelected: boolean
-    onSelected: (cell: Cell) => void
 }
 
-const CellView: FC<ICellProps> = ({ cell, isSelected, onSelected }) => {
+const CellView: FC<ICellProps> = ({ cell, isSelected }) => {
     console.log('render cell')
 
     return (
         <div
             className={`cell ${cell.color} ${isSelected ? 'selected' : ''}`}
-            onClick={() => onSelected(cell)}
+            onClick={() => BoardState.onSelectedCell(cell)}
             style={{ background: cell.available && cell.figure ? 'green' : '' }}
         >
             {cell.available && !cell.figure && <div className='available' />}

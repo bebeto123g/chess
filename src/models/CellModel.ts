@@ -3,7 +3,6 @@ import { Colors, Figure } from './figures/FigureModel'
 
 export class Cell {
     public available = false // Можно ли переместиться
-    public id = Math.random() // для ключей React
 
     constructor(
         public board: Board,
@@ -20,7 +19,7 @@ export class Cell {
 
     moveFigure(target: Cell) {
         if (this.figure?.canMove(target)) {
-            this.figure.moveFigure(target)
+            this.figure.moveFigure()
             if (target.figure) {
                 this.addLostFigure(target.figure)
             }

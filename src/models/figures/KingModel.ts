@@ -39,8 +39,4 @@ export class King extends Figure {
 
         return false
     }
-
-    moveFigure(target: Cell) {
-        console.log(target)
-    }
 }

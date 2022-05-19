@@ -22,7 +22,7 @@
         "quotes": ["warn", "single", { "allowTemplateLiterals": true }],
         "jsx-quotes": ["warn", "prefer-single"],
         "no-debugger": "warn",
-        "no-console": "warn",
+        "no-console": "off",
         "prefer-const": "warn",
         "max-len": ["warn", { "code": 100 }],
         "comma-dangle": ["warn", "always-multiline"],

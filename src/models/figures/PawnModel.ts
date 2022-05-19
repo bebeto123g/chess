@@ -41,8 +41,7 @@ export class Pawn extends Figure {
         return false
     }
 
-    moveFigure(target: Cell): void {
-        console.log(target)
+    moveFigure() {
         this.isFirstStep = false
     }
 }

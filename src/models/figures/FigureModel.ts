@@ -15,7 +15,7 @@ export enum FigureName {
     ROOK = 'Ладья',
     BISHOP = 'Слон',
 }
-export abstract class Figure {
+export class Figure {
     color: Colors
     cell: Cell
     logo: typeof Logo | null = null
@@ -40,5 +40,7 @@ export abstract class Figure {
         return true
     }
 
-    abstract moveFigure(target: Cell): void
+    moveFigure() {
+        return
+    }
 }

@@ -21,8 +21,4 @@ export class Knight extends Figure {
 
         return (dx === 1 && dy === 2) || (dx === 2 && dy === 1)
     }
-
-    moveFigure(target: Cell) {
-        console.log(target)
-    }
 }

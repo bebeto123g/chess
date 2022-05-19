@@ -22,8 +22,4 @@ export class Bishop extends Figure {
 
         return false
     }
-
-    moveFigure(target: Cell) {
-        console.log(target)
-    }
 }

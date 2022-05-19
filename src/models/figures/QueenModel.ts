@@ -31,8 +31,4 @@ export class Queen extends Figure {
 
         return false
     }
-
-    moveFigure(target: Cell) {
-        console.log(target)
-    }
 }
