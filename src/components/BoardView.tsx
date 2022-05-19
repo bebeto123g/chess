@@ -1,46 +1,45 @@
 import React, { FC, Fragment, useCallback, useEffect, useState } from 'react'
+import { observer } from 'mobx-react'
 
 import Loader from '../UI/Loader/Loader'
 import CellView from './CellView'
 import { Cell } from '../models/CellModel'
 import { Board } from '../models/BoardModel'
 import { Colors } from '../models/figures/FigureModel'
+import BoardState from '../store/BoardState'
 
 interface IBoardViewProps {
     board: Board
     currentPlayer: Colors
-    setBoard: (board: Board) => void
     swapPlayer: () => void
 }
 
-const BoardView: FC<IBoardViewProps> = ({ board, currentPlayer, setBoard, swapPlayer }) => {
+const BoardView: FC<IBoardViewProps> = ({ board, currentPlayer, swapPlayer }) => {
     const [selectedCell, setSelectedCell] = useState<Cell | null>(null)
 
-    const onSelectedCell = useCallback((cell: Cell) => {
-        if (selectedCell && selectedCell !== cell && selectedCell.figure?.canMove(cell)) {
-            selectedCell.moveFigure(cell)
-            swapPlayer()
-            setSelectedCell(null)
-        } else {
-            if (cell.figure?.color === currentPlayer) {
-                setSelectedCell(cell)
+    const onSelectedCell = useCallback(
+        (cell: Cell) => {
+            if (selectedCell && selectedCell !== cell && selectedCell.figure?.canMove(cell)) {
+                selectedCell.moveFigure(cell)
+                swapPlayer()
+                setSelectedCell(null)
+            } else {
+                if (cell.figure?.color === currentPlayer) {
+                    setSelectedCell(cell)
+                }
             }
-        }
-    }, [selectedCell, currentPlayer, swapPlayer])
+        },
+        [selectedCell, currentPlayer, swapPlayer],
+    )
 
     const highLightCells = () => {
         board.highLightCells(selectedCell)
-        updateBoard()
-    }
-
-    const updateBoard = () => {
-        setBoard(board.getCopyBoard())
+        BoardState.updateBoard()
     }
 
     useEffect(() => {
         highLightCells()
     }, [selectedCell])
-
 
     if (!board) return <Loader color='orange' />
 
@@ -56,7 +55,7 @@ const BoardView: FC<IBoardViewProps> = ({ board, currentPlayer, setBoard, swapPl
                             return (
                                 <CellView
                                     onSelected={onSelectedCell}
-                                    key={String(cell.id) + cell.figure}
+                                    key={String(cell.id) + String(cell.figure?.id)}
                                     cell={cell}
                                     isSelected={isSelected}
                                 />
@@ -69,4 +68,4 @@ const BoardView: FC<IBoardViewProps> = ({ board, currentPlayer, setBoard, swapPl
     )
 }
 
-export default BoardView
+export default observer(BoardView)

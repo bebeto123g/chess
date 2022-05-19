@@ -5,12 +5,12 @@ import { Colors } from '../models/figures/FigureModel'
 
 export interface IBoardState {
     board: Board
+    currentPlayer: Colors
 }
 
-class $board {
+class BoardState {
     board: Board = new Board()
     currentPlayer: Colors = Colors.WHITE
-    selectedCell: Cell | null = null
 
     constructor() {
         makeAutoObservable(this)
@@ -25,35 +25,24 @@ class $board {
         this.currentPlayer = this.currentPlayer === Colors.WHITE ? Colors.BLACK : Colors.WHITE
     }
 
-    onSelectedCell(cell: Cell) {
-        if (
-            this.selectedCell &&
-            this.selectedCell !== cell &&
-            this.selectedCell.figure?.canMove(cell)
-        ) {
-            this.selectedCell.moveFigure(cell)
-            this.toggleCurrentPlayer()
-            this.selectedCell = null
-        } else {
-            if (cell.figure?.color === this.currentPlayer) {
-                this.selectedCell = cell
-            }
-        }
-    }
-
-    highLightCells() {
-        this.board.highLightCells(this.selectedCell)
+    highLightCells(cell: Cell) {
+        this.board.highLightCells(cell)
     }
 
     updateBoard() {
         this.board = this.board.getCopyBoard()
     }
 
+    setBoard(board: Board) {
+        this.board = board
+    }
+
     get state(): IBoardState {
         return {
             board: this.board,
+            currentPlayer: this.currentPlayer,
         }
     }
 }
 
-export default new $board()
+export default new BoardState()
