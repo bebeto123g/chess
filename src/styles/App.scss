@@ -3,6 +3,20 @@
     padding: 0;
 }
 
+.header {
+    background-color: cadetblue;
+    &-wrapper {
+        padding: 20px 0;
+        a {
+            margin-right: 20px;
+            color: azure;
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+}
+
 .app {
     width: 100vw;
     height: 100vh;
@@ -13,26 +27,30 @@
 
 .board {
     width: calc(64px * 8);
+    min-width: calc(64px * 8);
     height: calc(64px * 8);
     display: flex;
     flex-wrap: wrap;
-    margin: 20px auto;
 }
+
 .cell {
     width: 64px;
     height: 64px;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    img {
+        width: 48px;
+        height: 48px;
+        position: relative;
+    }
 }
-.cell img {
-    width: 48px;
-    height: 48px;
-    position: relative;
-}
+
 .black {
     background-color: deepskyblue;
 }
+
 .white {
     background-color: #eed4ac;
 }
@@ -40,6 +58,7 @@
 .selected {
     background-color: brown;
 }
+
 .available {
     height: 12px;
     width: 12px;
@@ -51,11 +70,12 @@
     height: calc(50vh - 60px);
     padding: 30px;
     background-color: lightgray;
-    flex-basis: 48%;
+    flex-basis: 20%;
 }
 
 .lost-wrapper {
     margin-top: 24px;
     display: flex;
+    gap: 12px;
     justify-content: space-between;
 }

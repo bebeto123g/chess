@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, memo } from 'react'
 import { Figure } from '../models/figures/FigureModel'
 
 interface ILostFigureViewProps {
@@ -7,6 +7,8 @@ interface ILostFigureViewProps {
 }
 
 const LostFigureView: FC<ILostFigureViewProps> = ({ title, figures }) => {
+    console.log('render LostFigureView')
+
     return (
         <div className='lost'>
             <h3>{title}</h3>
@@ -22,4 +24,4 @@ const LostFigureView: FC<ILostFigureViewProps> = ({ title, figures }) => {
     )
 }
 
-export default LostFigureView
+export default memo(LostFigureView)

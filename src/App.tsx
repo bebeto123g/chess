@@ -4,7 +4,7 @@ import { routes } from './routes/routes'
 
 import PageLoader from './UI/Loader/PageLoader'
 import AppContainer from './UI/Container/AppContainer'
-import { Link } from 'react-router-dom'
+import Header from './components/Header'
 import Container from './UI/Container/Container'
 
 const App = () => {
@@ -12,12 +12,11 @@ const App = () => {
 
     return (
         <>
-            <Container>
-                <Link to={'/'}>Игра</Link>
-                <Link to={'/knight'}>Про кона</Link>
-            </Container>
+            <Header />
             <AppContainer>
-                <Suspense fallback={<PageLoader />}>{appRoutes}</Suspense>
+                <Container>
+                    <Suspense fallback={<PageLoader />}>{appRoutes}</Suspense>
+                </Container>
             </AppContainer>
         </>
     )

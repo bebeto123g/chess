@@ -1,14 +1,13 @@
 import React, { useRef } from 'react'
-import { Colors } from '../models/figures/FigureModel'
 import styles from '../styles/KnightView.module.scss'
+
+import { Colors } from '../models/figures/FigureModel'
 
 const KnightView = () => {
     const count = useRef(0)
 
     return (
-        <form
-            className={`board ${styles.board}`}
-        >
+        <form className={`board ${styles.board}`}>
             {Array(8)
                 .fill('')
                 .map((_1, i) => {

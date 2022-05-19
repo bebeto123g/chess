@@ -21,6 +21,7 @@ class BoardState {
     restart() {
         this.board = new Board()
         this.currentPlayer = Colors.WHITE
+        this.setSelectedCell(null)
     }
 
     toggleCurrentPlayer() {
@@ -36,10 +37,6 @@ class BoardState {
         this.board = this.board.getCopyBoard()
     }
 
-    setBoard(board: Board) {
-        this.board = board
-    }
-
     onSelectedCell(cell: Cell) {
         if (
             this.selectedCell &&
@@ -48,12 +45,20 @@ class BoardState {
         ) {
             this.selectedCell.moveFigure(cell)
             this.toggleCurrentPlayer()
-            this.selectedCell = null
+            this.setSelectedCell(null)
         } else if (cell.figure?.color === this.currentPlayer) {
-            this.selectedCell = cell
+            this.setSelectedCell(cell)
         }
 
         this.highLightCells()
+    }
+
+    setBoard(board: Board) {
+        this.board = board
+    }
+
+    setSelectedCell(cell: Cell | null) {
+        this.selectedCell = cell
     }
 
     get state(): IBoardState {
