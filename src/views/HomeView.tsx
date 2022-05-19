@@ -3,15 +3,12 @@ import React, { useCallback, useEffect, useState } from 'react'
 import Container from '../UI/Container/Container'
 import BoardView from '../components/BoardView'
 import { Board } from '../models/BoardModel'
-import { Player } from '../models/PLayerModel'
-import { Colors } from '../models/ColorsModel'
 import LostFigureView from '../components/LostFigureView'
+import { Colors } from '../models/figures/FigureModel'
 
 const HomeView = () => {
     const [board, setBoard] = useState(new Board())
-    const [whitePlayer, setWhitePlayer] = useState(new Player(Colors.WHITE))
-    const [blackPlayer, setBlackPlayer] = useState(new Player(Colors.BLACK))
-    const [currentPlayer, setCurrentPlayer] = useState<Player | null>(null)
+    const [currentPlayer, setCurrentPlayer] = useState<Colors>(Colors.WHITE)
 
     useEffect(() => {
         restart()
@@ -19,12 +16,12 @@ const HomeView = () => {
 
     const restart = () => {
         const newBoard = new Board()
-        setCurrentPlayer(whitePlayer)
+        setCurrentPlayer(Colors.WHITE)
         setBoard(newBoard)
     }
 
     const swapPlayer = () => {
-        setCurrentPlayer((prev) => (prev === whitePlayer ? blackPlayer : whitePlayer))
+        setCurrentPlayer((prev) => (prev === Colors.WHITE ? Colors.BLACK : Colors.WHITE))
     }
 
     const updateBoard = useCallback((board: Board) => {
@@ -40,6 +37,9 @@ const HomeView = () => {
                 swapPlayer={swapPlayer}
             />
             <div className=''>
+                <button onClick={() => restart()}>Reset</button>
+            </div>
+            <div className='lost-wrapper'>
                 <LostFigureView title='Black' figures={board.lostBlackFigures} />
                 <LostFigureView title='White' figures={board.lostWhiteFigures} />
             </div>

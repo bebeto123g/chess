@@ -1,6 +1,5 @@
 import { Cell } from '../CellModel'
-import { Colors } from '../ColorsModel'
-import { Figure, FigureName } from './FigureModel'
+import { Colors, Figure, FigureName } from './FigureModel'
 
 import BlackRook from '../../assets/black-rook.png'
 import WhiteRook from '../../assets/white-rook.png'
@@ -26,5 +25,9 @@ export class Rook extends Figure {
         }
 
         return false
+    }
+
+    moveFigure(target: Cell) {
+        console.log(target)
     }
 }

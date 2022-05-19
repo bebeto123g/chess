@@ -1,6 +1,5 @@
 import { Cell } from '../CellModel'
-import { Colors } from '../ColorsModel'
-import { Figure, FigureName } from './FigureModel'
+import { Colors, Figure, FigureName } from './FigureModel'
 
 import BlackBishop from '../../assets/black-bishop.png'
 import WhiteBishop from '../../assets/white-bishop.png'
@@ -22,5 +21,9 @@ export class Bishop extends Figure {
         }
 
         return false
+    }
+
+    moveFigure(target: Cell) {
+        console.log(target)
     }
 }

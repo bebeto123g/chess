@@ -1,10 +1,9 @@
 import { Board } from './BoardModel'
-import { Colors } from './ColorsModel'
-import { Figure } from './figures/FigureModel'
+import { Colors, Figure } from './figures/FigureModel'
 
 export class Cell {
     public available = false // Можно ли переместиться
-    public id = Math.random() // для ключей React) {
+    public id = Math.random() // для ключей React
 
     constructor(
         public board: Board,

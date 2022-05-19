@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { Colors } from '../models/ColorsModel'
+import { Colors } from '../models/figures/FigureModel'
 import styles from '../styles/KnightView.module.scss'
 
 const KnightView = () => {

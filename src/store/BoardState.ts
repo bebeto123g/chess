@@ -5,9 +5,7 @@ export interface IBoardState {
     board: Board | null
 }
 
-class $board implements IBoardState {
-    private static USER_FORM_STORAGE_KEY = 'storage/user-form'
-
+class $board {
     board: Board | null = null
 
     constructor() {

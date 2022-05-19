@@ -50,6 +50,11 @@
 .lost {
     height: calc(50vh - 60px);
     padding: 30px;
-    margin-left: 50px;
     background-color: lightgray;
+    flex-basis: 48%;
+}
+
+.lost-wrapper {
+    display: flex;
+    justify-content: space-between;
 }

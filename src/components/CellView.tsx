@@ -8,6 +8,8 @@ interface ICellProps {
 }
 
 const CellView: FC<ICellProps> = ({ cell, isSelected, onSelected }) => {
+    console.log('render cell')
+
     return (
         <div
             className={`cell ${cell.color} ${isSelected ? 'selected' : ''}`}

@@ -1,6 +1,5 @@
 import { Cell } from '../CellModel'
-import { Colors } from '../ColorsModel'
-import { Figure, FigureName } from './FigureModel'
+import { Colors, Figure, FigureName } from './FigureModel'
 
 import BlackKPawn from '../../assets/black-pawn.png'
 import WhitePawnt from '../../assets/white-pawn.png'
@@ -43,7 +42,7 @@ export class Pawn extends Figure {
     }
 
     moveFigure(target: Cell): void {
-        super.moveFigure(target)
+        console.log(target)
         this.isFirstStep = false
     }
 }

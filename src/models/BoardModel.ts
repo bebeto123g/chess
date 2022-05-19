@@ -1,7 +1,6 @@
 import { Cell } from './CellModel'
-import { Colors } from './ColorsModel'
 import { Bishop } from './figures/BishopModel'
-import { Figure } from './figures/FigureModel'
+import { Colors, Figure } from './figures/FigureModel'
 import { King } from './figures/KingModel'
 import { Knight } from './figures/KnightModel'
 import { Pawn } from './figures/PawnModel'
@@ -49,7 +48,11 @@ export class Board {
         return newBoard
     }
 
-    public addFigures() {
+    public getCell(x: number, y: number) {
+        return this.cells[y][x]
+    }
+
+    private addFigures() {
         this.addKing()
         this.addKnight()
         this.addPawn()
@@ -94,9 +97,5 @@ export class Board {
         new Bishop(Colors.BLACK, this.getCell(5, 0))
         new Bishop(Colors.WHITE, this.getCell(2, 7))
         new Bishop(Colors.WHITE, this.getCell(5, 7))
-    }
-
-    public getCell(x: number, y: number) {
-        return this.cells[y][x]
     }
 }

@@ -1,6 +1,5 @@
 import { Cell } from '../CellModel'
-import { Colors } from '../ColorsModel'
-import { Figure, FigureName } from './FigureModel'
+import { Colors, Figure, FigureName } from './FigureModel'
 
 import BlackKing from '../../assets/black-king.png'
 import WhiteKing from '../../assets/white-king.png'
@@ -39,5 +38,9 @@ export class King extends Figure {
         }
 
         return false
+    }
+
+    moveFigure(target: Cell) {
+        console.log(target)
     }
 }

@@ -1,6 +1,10 @@
-import { Colors } from '../ColorsModel'
 import Logo from '../../assets/black-king.png'
 import { Cell } from '../CellModel'
+
+export enum Colors {
+    WHITE = 'white',
+    BLACK = 'black',
+}
 
 export enum FigureName {
     FIGURE = 'Фигура',
@@ -11,21 +15,17 @@ export enum FigureName {
     ROOK = 'Ладья',
     BISHOP = 'Слон',
 }
-
-export class Figure {
+export abstract class Figure {
     color: Colors
     cell: Cell
-    logo: typeof Logo | null
-    name: FigureName
-    id: number
+    logo: typeof Logo | null = null
+    name: FigureName = FigureName.FIGURE
+    id = Math.random()
 
     constructor(color: Colors, cell: Cell) {
         this.color = color
         this.cell = cell
         this.cell.figure = this
-        this.logo = null
-        this.name = FigureName.FIGURE
-        this.id = Math.random()
     }
 
     canMove(target: Cell): boolean {
@@ -33,14 +33,12 @@ export class Figure {
             return false
         }
 
-        if (target.figure?.name === FigureName.KING) {
+        if (target.figure?.name === null) {
             return false
         }
 
         return true
     }
 
-    moveFigure(target: Cell): void {
-        console.log(target)
-    }
+    abstract moveFigure(target: Cell): void
 }

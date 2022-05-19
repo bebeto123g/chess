@@ -1,14 +1,14 @@
-import React, { FC, Fragment, useEffect, useState } from 'react'
+import React, { FC, Fragment, useCallback, useEffect, useState } from 'react'
 
 import Loader from '../UI/Loader/Loader'
 import CellView from './CellView'
 import { Cell } from '../models/CellModel'
 import { Board } from '../models/BoardModel'
-import { Player } from '../models/PLayerModel'
+import { Colors } from '../models/figures/FigureModel'
 
 interface IBoardViewProps {
     board: Board
-    currentPlayer: Player | null
+    currentPlayer: Colors
     setBoard: (board: Board) => void
     swapPlayer: () => void
 }
@@ -16,17 +16,17 @@ interface IBoardViewProps {
 const BoardView: FC<IBoardViewProps> = ({ board, currentPlayer, setBoard, swapPlayer }) => {
     const [selectedCell, setSelectedCell] = useState<Cell | null>(null)
 
-    const onSelectedCell = (cell: Cell) => {
+    const onSelectedCell = useCallback((cell: Cell) => {
         if (selectedCell && selectedCell !== cell && selectedCell.figure?.canMove(cell)) {
             selectedCell.moveFigure(cell)
             swapPlayer()
             setSelectedCell(null)
         } else {
-            if (cell.figure?.color === currentPlayer?.color) {
+            if (cell.figure?.color === currentPlayer) {
                 setSelectedCell(cell)
             }
         }
-    }
+    }, [selectedCell, currentPlayer, swapPlayer])
 
     const highLightCells = () => {
         board.highLightCells(selectedCell)
@@ -41,11 +41,12 @@ const BoardView: FC<IBoardViewProps> = ({ board, currentPlayer, setBoard, swapPl
         highLightCells()
     }, [selectedCell])
 
+
     if (!board) return <Loader color='orange' />
 
     return (
         <>
-            <h2>Ход: {currentPlayer?.color}</h2>
+            <h2>Ход: {currentPlayer}</h2>
             <div className='board'>
                 {board.cells.map((row, index) => (
                     <Fragment key={index}>
@@ -55,7 +56,7 @@ const BoardView: FC<IBoardViewProps> = ({ board, currentPlayer, setBoard, swapPl
                             return (
                                 <CellView
                                     onSelected={onSelectedCell}
-                                    key={cell.id}
+                                    key={String(cell.id) + cell.figure}
                                     cell={cell}
                                     isSelected={isSelected}
                                 />
