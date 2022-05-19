@@ -2,8 +2,8 @@ import React, { useCallback, useEffect, useState } from 'react'
 
 import Container from '../UI/Container/Container'
 import BoardView from '../components/BoardView'
-import { Board } from '../models/BoardModel'
 import LostFigureView from '../components/LostFigureView'
+import { Board } from '../models/BoardModel'
 import { Colors } from '../models/figures/FigureModel'
 
 const HomeView = () => {
