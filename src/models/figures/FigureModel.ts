@@ -15,6 +15,7 @@ export enum FigureName {
     ROOK = 'Ладья',
     BISHOP = 'Слон',
 }
+
 export class Figure {
     color: Colors
     cell: Cell
